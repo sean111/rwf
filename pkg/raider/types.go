@@ -16,7 +16,7 @@ type Guild struct {
 	Id      int    `json:"id"`
 	Name    string `json:"name"`
 	Faction string `json:"faction"`
-	Realm   string `json:"realm"`
+	Realm   Realm  `json:"realm"`
 }
 
 type Realm struct {
@@ -70,10 +70,10 @@ type DefeatedEncounters struct {
 }
 
 type PulledEncounters struct {
-	Id            int    `json:"id"`
-	Slug          string `json:"slug"`
-	NumPulls      int    `json:"numPulls"`
-	PullStartedAt string `json:"pullStartedAt"`
-	BestPercent   int    `json:"bestPercent"`
-	IsDefeated    bool   `json:"isDefeated"`
+	Id            int     `json:"id"`
+	Slug          string  `json:"slug"`
+	NumPulls      int     `json:"numPulls"`
+	PullStartedAt string  `json:"pullStartedAt"`
+	BestPercent   float32 `json:"bestPercent"`
+	IsDefeated    bool    `json:"isDefeated"`
 }

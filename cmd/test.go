@@ -22,12 +22,20 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		data, err := raider.GetStaticData(10)
 		if err != nil {
-			log.Error("Error: ", err)
+			log.Error("Error: ", "message", err.Error())
 		}
 		log.Info("Raid Data :", "name", data.Raid[0].Name, "slug", data.Raid[0].Slug, "start_time", data.Raid[0].StartTimes.US)
 		//log.Info("Slug :", currentRaid.Slug)
 		//log.Info("US Start Time :", currentRaid.StartTimes.US)
 		//log.Info("US End Time :", currentRaid.EndTimes.US)
+
+		rankignData, err := raider.GetRaidRankings(data.Raid[0].Slug, "mythic", "world", 5, 0)
+		if err != nil {
+			log.Error("Error: ", "message", err.Error())
+		}
+
+		log.Info("#1 Guild", "name", rankignData.RaidRanking[0].Guild.Name, "region", rankignData.RaidRanking[0].Region.Name, "realm", rankignData.RaidRanking[0].Guild.Realm.Name)
+
 	},
 }
 

@@ -5,4 +5,5 @@ type StaticDataResponse struct {
 }
 
 type RaidRankingsResponse struct {
+	RaidRanking []RaidRanking `json:"raidRankings"`
 }

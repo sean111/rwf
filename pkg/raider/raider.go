@@ -35,7 +35,8 @@ func GetStaticData(expansionId int) (StaticDataResponse, error) {
 }
 
 func GetRaidRankings(raid string, difficulty string, region string, limit int, page int) (RaidRankingsResponse, error) {
-	dataUrl := fmt.Sprintf("%s/raiding/raid-rankings?raid=%&difficulty=%s&region=%s&limit=%d&page=%d", raid, difficulty, region, limit, page)
+	dataUrl := fmt.Sprintf("%s/raiding/raid-rankings?raid=%s&difficulty=%s&region=%s&limit=%d&page=%d", apiUrl, raid, difficulty, region, limit, page)
+	log.Info("dataUrl", "url", dataUrl)
 	resp, _ := http.NewRequest(http.MethodGet, dataUrl, nil)
 
 	response, err := http.DefaultClient.Do(resp)
