@@ -14,13 +14,9 @@ var log = logger.NewWithOptions(os.Stderr, logger.Options{
 	ReportCaller:    true,
 })
 
-// Private Methods
-
-// Public Methods
-
 func GetStaticData(expansionId int) (StaticDataResponse, error) {
 	staticDataUrl := fmt.Sprintf("%s/raiding/static-data/?expansion_id=%d", apiUrl, expansionId)
-	resp, err := http.NewRequest(http.MethodGet, staticDataUrl, nil)
+	resp, _ := http.NewRequest(http.MethodGet, staticDataUrl, nil)
 	resp.Header.Add("Accept", "application/json")
 
 	response, err := http.DefaultClient.Do(resp)
@@ -30,11 +26,29 @@ func GetStaticData(expansionId int) (StaticDataResponse, error) {
 	}
 	defer response.Body.Close()
 	var raidsResponse StaticDataResponse
-	log.Info(response.Header)
 	err = json.NewDecoder(response.Body).Decode(&raidsResponse)
 	if err != nil {
 		log.Error(err.Error())
 		return StaticDataResponse{}, err
 	}
 	return raidsResponse, nil
+}
+
+func GetRaidRankings(raid string, difficulty string, region string, limit int, page int) (RaidRankingsResponse, error) {
+	dataUrl := fmt.Sprintf("%s/raiding/raid-rankings?raid=%&difficulty=%s&region=%s&limit=%d&page=%d", raid, difficulty, region, limit, page)
+	resp, _ := http.NewRequest(http.MethodGet, dataUrl, nil)
+
+	response, err := http.DefaultClient.Do(resp)
+	if err != nil {
+		return RaidRankingsResponse{}, err
+	}
+
+	defer response.Body.Close()
+
+	var rankingResponse RaidRankingsResponse
+	err = json.NewDecoder(response.Body).Decode(&rankingResponse)
+	if err != nil {
+		return RaidRankingsResponse{}, err
+	}
+	return rankingResponse, nil
 }
