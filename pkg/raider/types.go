@@ -1,5 +1,29 @@
 package raider
 
+var Expansion = struct {
+	Legion           int
+	BattleForAzeroth int
+	Shadowlands      int
+	DragonFlight     int
+	TheWarWithin     int
+}{
+	Legion:           6,
+	BattleForAzeroth: 7,
+	Shadowlands:      8,
+	DragonFlight:     9,
+	TheWarWithin:     10,
+}
+
+var Difficulty = struct {
+	Normal string
+	Heroic string
+	Mythic string
+}{
+	Normal: "normal",
+	Heroic: "heroic",
+	Mythic: "mythic",
+}
+
 type Encounter struct {
 	Id   int
 	Slug string
@@ -17,6 +41,10 @@ type Guild struct {
 	Name    string `json:"name"`
 	Faction string `json:"faction"`
 	Realm   Realm  `json:"realm"`
+	Region  Region `json:"region"`
+	Path    string `json:"path"`
+	Logo    string `json:"logo"`
+	Color   string `json:"color"`
 }
 
 type Realm struct {
@@ -55,10 +83,6 @@ type RaidRanking struct {
 	Rank               int                  `json:"rank"`
 	RegionRank         int                  `json:"regionRank"`
 	Guild              Guild                `json:"guild"`
-	Region             Region               `json:"region"`
-	Path               string               `json:"path"`
-	Logo               string               `json:"logo"`
-	Color              string               `json:"color"`
 	EncountersDefeated []DefeatedEncounters `json:"encountersDefeated"`
 	EncountersPulled   []PulledEncounters   `json:"encountersPulled"`
 }
