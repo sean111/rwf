@@ -1,5 +1,11 @@
 package raider
 
 type StaticDataResponse struct {
-	Raid []RaidData `json:"raids"`
+	Status int
+	Data   []RaidData `json:"raids"`
+}
+
+type RaidRankingsResponse struct {
+	Status int
+	Data   []RaidRanking `json:"raidRankings"`
 }
