@@ -8,8 +8,6 @@ import (
 	"net/http"
 )
 
-var apiUrl string = "https://raider.io/api/v1"
-
 func GetStaticData(options StaticDataOptions) (StaticDataResponse, error) {
 	if options.Expansion < 6 || options.Expansion > 10 {
 		return StaticDataResponse{}, errors.New("invalid expansion selected")
